@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "src",
+      "type": "python",
+      "request": "attach",
+      "port": 9001,
+      "host": "localhost",
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/src",
+          "remoteRoot": "/app"
+        }
+      ]
+    }
+  ]
+}

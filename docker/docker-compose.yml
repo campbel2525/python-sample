@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  # ---------------------------------
+  # database
+  # ---------------------------------
+  db:
+    image: mysql/mysql-server:8.0
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: sample
+    volumes:
+      - db-data80:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - shared-network
+      - default
+
+  # ---------------------------------
+  # python-src
+  # ---------------------------------
+  python-src:
+    restart: "no"
+    tty: true
+    build:
+      context: ${CONTEXT_SRC}
+      dockerfile: docker/local/python/Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "127.0.0.1:9001:9001" # デバッグ用
+    volumes:
+      - ${CONTEXT_SRC}:/app
+    networks:
+      - shared-network
+      - default
+
+volumes:
+  db-data80:
+
+networks:
+  shared-network:
+    name: ${PROJECT_NAME}-network
