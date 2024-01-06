@@ -7,3 +7,4 @@ __pycache__
 .venv
 .mypy_cache
 .flake8
+!/docker/.env

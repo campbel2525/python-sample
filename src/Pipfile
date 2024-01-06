@@ -9,6 +9,10 @@ flake8 = "*"
 mypy = "*"
 black = "*"
 isort = "*"
+python-dotenv = "*"
+alembic = "*"
+pytz = "*"
+pymysql = "*"
 
 [dev-packages]
 
