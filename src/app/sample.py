@@ -48,7 +48,7 @@ def test3():
 def test4():
     """
     logのサンプル
-    src/logs/log.logに出力されます
+    src/logs/python.logに出力されます
     """
 
     from app.utils.log import setup_logger

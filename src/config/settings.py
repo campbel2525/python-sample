@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+import logging
 
 # from pathlib import Path
 
@@ -31,6 +32,11 @@ DATABASE = {
 }
 d = DATABASE
 DATABASE_URL = f"{d['DB_DIALECT']}+{d['DB_DRIVER']}://{d['DB_USERNAME']}:{d['DB_PASSWORD']}@{d['DB_HOST']}:{d['DB_PORT']}/{d['DB_DATABASE']}?charset={d['DB_CHARSET_TYPE']}"  # noqa: E501
+
+# ロガーの設定
+logging.basicConfig(filename="logs/sqlalchemy.log")
+logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+
 
 DB_DEBUG = os.getenv("DB_DEBUG", False) == "True"
 engine = create_engine(DATABASE_URL, echo=DB_DEBUG, pool_recycle=3600)

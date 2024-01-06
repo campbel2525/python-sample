@@ -1,7 +1,7 @@
 import logging
 
 
-def setup_logger(name="my_logger", log_file="logs/log.log", level=logging.INFO):
+def setup_logger(name="my_logger", log_file="logs/python.log", level=logging.INFO):
     """To setup as many loggers as you want"""
 
     formatter = logging.Formatter(
