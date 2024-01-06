@@ -37,7 +37,6 @@ DATABASE_URL = f"{d['DB_DIALECT']}+{d['DB_DRIVER']}://{d['DB_USERNAME']}:{d['DB_
 logging.basicConfig(filename="logs/sqlalchemy.log")
 logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
-
 DB_DEBUG = os.getenv("DB_DEBUG", False) == "True"
 engine = create_engine(DATABASE_URL, echo=DB_DEBUG, pool_recycle=3600)
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
