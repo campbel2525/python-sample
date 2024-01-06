@@ -9,12 +9,11 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 load_dotenv()
 
 # app
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent
 
-DB_DEBUG = os.getenv("DB_DEBUG", False) == "True"
 
 TIME_ZONE = os.getenv("TIME_ZONE", "UTC")
-DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+# DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 # データベースの接続情報
@@ -31,6 +30,7 @@ DATABASE = {
 d = DATABASE
 DATABASE_URL = f"{d['DB_DIALECT']}+{d['DB_DRIVER']}://{d['DB_USERNAME']}:{d['DB_PASSWORD']}@{d['DB_HOST']}:{d['DB_PORT']}/{d['DB_DATABASE']}?charset={d['DB_CHARSET_TYPE']}"  # noqa: E501
 
+DB_DEBUG = os.getenv("DB_DEBUG", False) == "True"
 engine = create_engine(DATABASE_URL, echo=DB_DEBUG, pool_recycle=3600)
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 db = Session()

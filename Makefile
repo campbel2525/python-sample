@@ -13,6 +13,8 @@ build: ## 開発環境構築(ビルド)
 	./docker/wait-for-db.sh
 	docker compose -f $(compose_file) -p $(project_name) exec -T db mysql -psecret < docker/setup.dev.sql
 	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv install --dev
+	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv run alembic upgrade head
+
 
 init: ## 開発環境構築
 	cp src/.env.example src/.env
