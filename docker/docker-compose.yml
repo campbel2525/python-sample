@@ -9,7 +9,7 @@ services:
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: sample
+      MYSQL_DATABASE: sqlqlchemy
     volumes:
       - db-data80:/var/lib/mysql
     ports:
