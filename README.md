@@ -77,7 +77,7 @@ docker を利用しているので python を実行する場合は、コンテ�
 以下にその方法を説明します
 
 例  
-`src/sample1.py.py`を実行する場合
+`src/sample1.py`を実行する場合
 
 手順 1  
 下記のコマンドでコンテナの中に入ります
@@ -87,10 +87,10 @@ make shell
 ```
 
 手順 2  
-下記のコマンドで `src/sample1.py.py`を実行します
+下記のコマンドで `src/sample1.py`を実行します
 
 ```
-pipenv run python sample1.py.py
+pipenv run python app/sample.py
 ```
 
 ## vscode で debugpy によるデバッグの方法
@@ -98,16 +98,16 @@ pipenv run python sample1.py.py
 vscode で debugpy によるデバッグ方法を説明します  
 参考: https://atmarkit.itmedia.co.jp/ait/articles/2107/16/news029.html
 
-`src/sample1.py.py` をデバッグする方法
+`src/sample1.py` をデバッグする方法
 
 手順 1  
 vscode のプラグインの XXX をインストールします
 
 手順 2  
-`src/sample1.py.py` のデバッグのコメントアウトを外します
+`src/sample1.py` のデバッグのコメントアウトを外します
 
 手順 3  
-「python の実行方法」を参考に実行し `src/sample1.py.py` を実行します
+「python の実行方法」を参考に実行し `src/sample1.py` を実行します
 
 手順４  
 コンソールを確認すると
