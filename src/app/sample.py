@@ -24,8 +24,8 @@ def test2():
     DBにinsertのサンプル
     """
 
-    from config.settings import db
     from app import models
+    from config.settings import db
 
     test = models.Test()
     test.name = "hogehoge"
@@ -38,8 +38,8 @@ def test3():
     DBから取得のサンプル
     """
 
-    from config.settings import db
     from app import models
+    from config.settings import db
 
     result = db.query(models.Test).all()
     print(result)

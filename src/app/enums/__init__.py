@@ -1,1 +1,1 @@
-from .hotpepper_beauty_kind import *  # noqa
+from .samples import *  # noqa
