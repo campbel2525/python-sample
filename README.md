@@ -7,8 +7,10 @@ m1 macbook では動作確認済みです
 デバッグ: debugpy  
 python バージョン: 3.10  
 ライブラリ管理: pipenv  
+orm: sqlqlchemy  
 mysql: 8.0  
-mysql の ipass やポートなどは`src/.env.example`を参照してください
+mysql の ipass やポートなどは`src/.env.example`を参照してください  
+フォーマッターなど: flake8, mypy, black, isort
 
 ## 環境構築方法
 
