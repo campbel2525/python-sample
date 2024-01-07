@@ -43,6 +43,7 @@ format: ## コードフォーマット
 	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv run mypy .
 
 push: ## push
+# make format
 	git switch main
 	git pull origin main
 	git add .
