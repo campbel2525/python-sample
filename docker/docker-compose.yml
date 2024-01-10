@@ -19,9 +19,9 @@ services:
       - default
 
   # ---------------------------------
-  # python-src
+  # python
   # ---------------------------------
-  python-src:
+  python:
     restart: "no"
     tty: true
     build:

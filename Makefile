@@ -12,12 +12,12 @@ build: ## 開発環境構築(ビルド)
 	docker compose -f $(compose_file) -p $(project_name) up -d
 	./docker/wait-for-db.sh
 	docker compose -f $(compose_file) -p $(project_name) exec -T db mysql -psecret < docker/setup.dev.sql
-	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv install --dev
-	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv run alembic upgrade head
+	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv install --dev
+	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run alembic upgrade head
 
 
 init: ## 開発環境構築
-	cp src/.env.example src/.env
+	cp python/.env.example python/.env
 	make build
 
 up: ## 開発環境up
@@ -33,14 +33,14 @@ destroy: ## 開発環境削除
 	docker volume ls -qf name=$(project_name) | xargs docker volume rm
 
 shell: ## shellに入る
-	docker compose -f $(compose_file) -p $(project_name) exec -it python-src bash
+	docker compose -f $(compose_file) -p $(project_name) exec -it python bash
 
 
 format: ## コードフォーマット
-	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv run isort .
-	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv run black .
-	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv run flake8 .
-	docker compose -f $(compose_file) -p $(project_name) exec -it python-src pipenv run mypy .
+	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run isort .
+	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run black .
+	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run flake8 .
+	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run mypy .
 
 push: ## push
 # make format

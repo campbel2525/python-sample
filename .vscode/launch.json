@@ -2,14 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "src",
+      "name": "python",
       "type": "python",
       "request": "attach",
       "port": 9001,
       "host": "localhost",
       "pathMappings": [
         {
-          "localRoot": "${workspaceFolder}/src",
+          "localRoot": "${workspaceFolder}/python",
           "remoteRoot": "/app"
         }
       ]

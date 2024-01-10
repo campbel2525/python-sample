@@ -9,7 +9,7 @@ python バージョン: 3.10
 ライブラリ管理: pipenv  
 orm: sqlqlchemy  
 mysql: 8.0  
-mysql の ipass やポートなどは`src/.env.example`を参照してください  
+mysql の ipass やポートなどは`python/.env.example`を参照してください  
 フォーマッターなど: flake8, mypy, black, isort
 
 ## 環境構築方法
@@ -83,7 +83,7 @@ docker を利用しているので python を実行する場合は、コンテ�
 以下にその方法を説明します
 
 例  
-`src/sample.py`を実行する場合
+`python/sample.py`を実行する場合
 
 手順 1  
 下記のコマンドでコンテナの中に入ります
@@ -93,7 +93,7 @@ make shell
 ```
 
 手順 2  
-下記のコマンドで `src/sample.py`を実行します
+下記のコマンドで `python/sample.py`を実行します
 
 ```
 pipenv run python app/sample.py
@@ -104,16 +104,16 @@ pipenv run python app/sample.py
 vscode で debugpy によるデバッグ方法を説明します  
 参考: https://atmarkit.itmedia.co.jp/ait/articles/2107/16/news029.html
 
-`src/sample.py` をデバッグする方法
+`python/sample.py` をデバッグする方法
 
 手順 1  
 vscode のプラグインの XXX をインストールします
 
 手順 2  
-`src/sample.py` のデバッグのコメントアウトを外します
+`python/sample.py` のデバッグのコメントアウトを外します
 
 手順 3  
-「python の実行方法」を参考に実行し `src/sample.py` を実行します
+「python の実行方法」を参考に実行し `python/sample.py` を実行します
 
 手順４  
 コンソールを確認すると
@@ -134,7 +134,7 @@ F5 のキーを押します
 ## python コードのフォーマット、静的解析について
 
 python にはプログラミングコードの品質を保つため、お勧めされているコードフォーマットや静的解析があります。  
-下記のコマンドを実行することで src 配下の python コードが自動で整形がされ、また静的解析が行われます。
+下記のコマンドを実行することで python 配下の python コードが自動で整形がされ、また静的解析が行われます。
 
 ```
 make format
