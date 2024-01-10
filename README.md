@@ -159,5 +159,3 @@ pipenv run alembic revision --autogenerate -m 'comment'
 ```
 pipenv run alembic upgrade head
 ```
-
-ß
