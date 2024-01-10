@@ -14,6 +14,7 @@ load_dotenv()
 # app
 # BASE_DIR = Path(__file__).resolve().parent
 
+APP_ENV = os.getenv("APP_ENV", "local")
 
 TIME_ZONE = os.getenv("TIME_ZONE", "UTC")
 # DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
@@ -33,9 +34,10 @@ DATABASE = {
 d = DATABASE
 DATABASE_URL = f"{d['DB_DIALECT']}+{d['DB_DRIVER']}://{d['DB_USERNAME']}:{d['DB_PASSWORD']}@{d['DB_HOST']}:{d['DB_PORT']}/{d['DB_DATABASE']}?charset={d['DB_CHARSET_TYPE']}"  # noqa: E501
 
-# ロガーの設定
-logging.basicConfig(filename="logs/sqlalchemy.log")
-logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+# sqlqlchemyのロガーの設定
+if APP_ENV == "local":
+    logging.basicConfig(filename="logs/sqlalchemy.log")
+    logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
 DB_DEBUG = os.getenv("DB_DEBUG", False) == "True"
 engine = create_engine(DATABASE_URL, echo=DB_DEBUG, pool_recycle=3600)
