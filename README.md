@@ -23,7 +23,8 @@ migration: database/migrations
 モデル: app/models  
 enum: app/enums  
 ログ: logs  
-テストケース: tests
+テストケース: tests  
+ドキュメントをまとめるフォルダ: doc
 
 ## 環境構築方法
 
