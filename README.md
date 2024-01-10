@@ -99,6 +99,8 @@ make shell
 pipenv run python app/sample.py
 ```
 
+python フォルダが docker の app にマウントしているため実行する python のファイルは`python/sample1.py`ではなく`sample1.py`となります。
+
 ## vscode で debugpy によるデバッグの方法
 
 vscode で debugpy によるデバッグ方法を説明します  
@@ -122,7 +124,7 @@ vscode のプラグインの XXX をインストールします
 waiting ...
 ```
 
-表示されていることを確認
+と表示されていることを確認
 
 手順 5  
 自分がデバッグを開始したい箇所にブレークポイントをセットします
