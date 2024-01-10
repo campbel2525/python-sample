@@ -5,8 +5,7 @@ project_name := $(PROJECT_NAME)
 help: ## ヘルプを表示
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-init: ## 開発環境構築
-	cp python/.env.example python/.env
+build: ## 開発環境構築(ビルド)
 	make destroy
 	docker compose -f $(compose_file) -p $(project_name) build --no-cache
 	docker compose -f $(compose_file) -p $(project_name) down --volumes
@@ -15,6 +14,11 @@ init: ## 開発環境構築
 	docker compose -f $(compose_file) -p $(project_name) exec -T db mysql -psecret < docker/setup.dev.sql
 	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv install --dev
 	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run alembic upgrade head
+
+
+init: ## 開発環境構築
+	cp python/.env.example python/.env
+	make build
 
 up: ## 開発環境up
 	docker compose -f $(compose_file) -p $(project_name) up -d
