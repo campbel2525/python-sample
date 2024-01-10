@@ -51,9 +51,9 @@ def test4():
     python/logs/python.logに出力されます
     """
 
-    from app.utils.log import setup_logger
+    from app import helpers
 
-    logger = setup_logger(__name__)
+    logger = helpers.logs.setup_logger(__name__)
     logger.info("This is a log message.")
     logger.error("This is an error message.")
 

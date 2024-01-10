@@ -19,7 +19,7 @@ mysql の ipass やポートなどは`python/.env.example`を参照してくだ�
 factory: database/factories  
 migration: database/migrations  
 外部と連携するファイル: app/services  
-便利な関数(プロジェクト全体で使用が可能なもの): app/utils  
+便利な関数(プロジェクト全体で使用が可能なもの): app/helpers  
 モデル: app/models  
 enum: app/enums  
 ログ: logs  
