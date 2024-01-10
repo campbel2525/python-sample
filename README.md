@@ -12,6 +12,19 @@ mysql: 8.0
 mysql の ipass やポートなどは`python/.env.example`を参照してください  
 フォーマッターなど: flake8, mypy, black, isort
 
+フォルダ構成は laravel を参考にしています
+
+## フォルダ構成の説明
+
+factory: database/factories  
+migration: database/migrations  
+外部と連携するファイル: app/services  
+便利な関数(プロジェクト全体で使用が可能なもの): app/utils  
+モデル: app/models  
+enum: app/enums  
+ログ: logs  
+テストケース: tests
+
 ## 環境構築方法
 
 手順 1
