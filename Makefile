@@ -36,7 +36,7 @@ shell: ## shellに入る
 	docker compose -f $(compose_file) -p $(project_name) exec -it python bash
 
 
-format: ## コードフォーマット
+check: ## コードフォーマット
 	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run isort .
 	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run black .
 	docker compose -f $(compose_file) -p $(project_name) exec -it python pipenv run flake8 .
