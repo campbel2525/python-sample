@@ -2,8 +2,6 @@ from typing import List, Optional, Union
 
 import tiktoken
 from langchain.schema import AIMessage, HumanMessage, SystemMessage
-
-# from langchain.chat_models import ChatOpenAI
 from langchain_openai import ChatOpenAI
 
 from config import settings
