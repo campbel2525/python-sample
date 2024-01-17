@@ -51,7 +51,7 @@ def test4():
 
     from app import helpers
 
-    logger = helpers.log_helper.setup_logger(__name__)
+    logger = helpers.log.setup_logger(__name__)
     logger.info("This is a log message.")
     logger.error("This is an error message.")
 

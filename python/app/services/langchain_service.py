@@ -4,7 +4,6 @@ import tiktoken
 from langchain.schema import AIMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 from config import openai
-from config import openai as openai_config
 
 from config import settings
 
@@ -17,8 +16,7 @@ class Langchain:
         temperature: float = 0.7,
         max_tokens: int = 1000,
     ) -> Optional[str]:
-        useable_model_names = [model.value for model in openai_config.UseableModelName]
-        if max_tokens not in useable_model_names:
+        if max_tokens not in openai.USEABLE_MODEL_NAME:
             raise ValueError("max_tokens is invalid.")
 
         langchain_messages = self._create_messages(messages)
