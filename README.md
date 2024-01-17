@@ -97,7 +97,7 @@ docker を利用しているので python を実行する場合は、コンテ�
 以下にその方法を説明します
 
 例  
-`python/sample.py`を実行する場合
+`python/src/sample.py`を実行する場合
 
 手順 1  
 下記のコマンドでコンテナの中に入ります
@@ -107,7 +107,7 @@ make shell
 ```
 
 手順 2  
-下記のコマンドで `python/sample.py`を実行します
+下記のコマンドで `python/src/sample.py`を実行します
 
 ```
 pipenv run python app/sample.py
@@ -120,16 +120,16 @@ python フォルダが docker の app にマウントしているため実行す
 vscode で debugpy によるデバッグ方法を説明します  
 参考: https://atmarkit.itmedia.co.jp/ait/articles/2107/16/news029.html
 
-`python/sample.py` をデバッグする方法
+`python/src/sample.py` をデバッグする方法
 
 手順 1  
 vscode のプラグインの XXX をインストールします
 
 手順 2  
-`python/sample.py` のデバッグのコメントアウトを外します
+`python/src/sample.py` のデバッグのコメントアウトを外します
 
 手順 3  
-「python の実行方法」を参考に実行し `python/sample.py` を実行します
+「python の実行方法」を参考に実行し `python/src/sample.py` を実行します
 
 手順４  
 コンソールを確認すると
@@ -172,4 +172,12 @@ pipenv run alembic revision --autogenerate -m 'comment'
 
 ```
 pipenv run alembic upgrade head
+```
+
+## push 際のルール
+
+下記のコマンドを実行してから push すること
+
+```
+make check
 ```

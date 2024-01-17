@@ -1,1 +1,1 @@
-from .logs import *  # noqa
+from .log_helper import *  # noqa
