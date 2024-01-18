@@ -181,33 +181,3 @@ pipenv run alembic upgrade head
 ```
 make check
 ```
-
-## import のルール
-
-config 系の import の仕方
-
-```
-import config
-config.settings.APP_ENV
-```
-
-helper 系の import の仕方
-
-```
-from app import helpers
-helpers.log.setup_logger()
-```
-
-model 系の import の仕方
-
-```
-from app import models
-models.Test
-```
-
-その他の import
-
-```
-from app.services.transformer import SummaryService
-x = SummaryService().summary_sentences(sentences)
-```

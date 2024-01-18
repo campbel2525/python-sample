@@ -19,7 +19,7 @@ def setup_logger(name="my_logger", log_file="logs/python.log", level=logging.INF
 
 
 # 使用用例
-# from app import helpers
-# logger = helpers.log.setup_logger(__name__)
+# from app.helpers import log_helper
+# logger = log_helper.setup_logger(__name__)
 # logger.info("This is a log message.")
 # logger.error("This is an error message.")

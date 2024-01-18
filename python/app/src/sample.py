@@ -49,9 +49,9 @@ def test4():
     python/logs/python.logに出力されます
     """
 
-    from app import helpers
+    from app.helpers import log_helper
 
-    logger = helpers.log.setup_logger(__name__)
+    logger = log_helper.setup_logger(__name__)
     logger.info("This is a log message.")
     logger.error("This is an error message.")
 
