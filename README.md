@@ -208,12 +208,6 @@ models.Test
 その他の import
 
 ```
-系の import の仕方
-```
-
 from app.services.transformer import SummaryService
 x = SummaryService().summary_sentences(sentences)
-
-```
-
 ```
