@@ -4,7 +4,7 @@ from sentence_transformers import SentenceTransformer
 from transformers import pipeline
 
 
-class Summary:
+class SummaryService:
     def summary_sentences(self, sentences: List[str]) -> List[str]:
         # 日本語のテキスト要約モデルをロードします。
         summarizer = pipeline("summarization", model="sonoisa/t5-base-japanese")
@@ -15,7 +15,7 @@ class Summary:
         return [summary["summary_text"] for summary in summaries]
 
 
-class Embedding:
+class EmbeddingService:
     def embedding_sentences(self, sentences: List[str]) -> List[List[float]]:
         # 1. cl-tohoku/bert-base-japanese-whole-word-masking
         # このモデルは全単語マスキングを行ったBERTモデルで、単語レベルでの意味を捉えることができます。
@@ -34,7 +34,7 @@ class Embedding:
         ]
 
 
-class Sentiment:
+class SentimentService:
     def sentiment_sentences(self, sentences: List[str]) -> List[Dict[str, Any]]:
         model_name = "lxyuan/distilbert-base-multilingual-cased-sentiments-student"
         classifier = pipeline("sentiment-analysis", model=model_name)
