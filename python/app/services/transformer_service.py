@@ -1,10 +1,11 @@
 from typing import Any, Dict, List
 
+from sentence_transformers import SentenceTransformer
+from transformers import pipeline
+
 
 class Summary:
-    def summary_sentences(self, sentences: str) -> List[str]:
-        from transformers import pipeline
-
+    def summary_sentences(self, sentences: List[str]) -> List[str]:
         # 日本語のテキスト要約モデルをロードします。
         summarizer = pipeline("summarization", model="sonoisa/t5-base-japanese")
 
@@ -15,7 +16,7 @@ class Summary:
 
 
 class Embedding:
-    def embedding_sentences(self, sentences: List[str]) -> List[float]:
+    def embedding_sentences(self, sentences: List[str]) -> List[List[float]]:
         # 1. cl-tohoku/bert-base-japanese-whole-word-masking
         # このモデルは全単語マスキングを行ったBERTモデルで、単語レベルでの意味を捉えることができます。
         # したがって、単語の意味が重要なタスク（例えば、文章の意味理解や質問応答など）に適しています。
@@ -23,8 +24,6 @@ class Embedding:
         # 2. cl-tohoku/bert-base-japanese-char
         # このモデルは文字レベルでBERTモデルを訓練したもので、
         # 細かい文字レベルの情報を必要とするタスク（例えば、品詞タグ付けや固有表現抽出など）に適しています。
-
-        from sentence_transformers import SentenceTransformer
 
         model = SentenceTransformer("cl-tohoku/bert-base-japanese-whole-word-masking")
         # model = SentenceTransformer("cl-tohoku/bert-base-japanese-whole-word-masking")
@@ -37,8 +36,6 @@ class Embedding:
 
 class Sentiment:
     def sentiment_sentences(self, sentences: List[str]) -> List[Dict[str, Any]]:
-        from transformers import pipeline
-
         model_name = "lxyuan/distilbert-base-multilingual-cased-sentiments-student"
         classifier = pipeline("sentiment-analysis", model=model_name)
 

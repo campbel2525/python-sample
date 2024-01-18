@@ -8,8 +8,8 @@ sentences = [
 x = transformer_service.Summary().summary_sentences(sentences)
 print(x)
 
-x = transformer_service.Embedding().embedding_sentences(sentences)
-print(x)
+y = transformer_service.Embedding().embedding_sentences(sentences)
+print(y)
 
-x = transformer_service.Sentiment().sentiment_sentences(sentences)
-print(x)
+z = transformer_service.Sentiment().sentiment_sentences(sentences)
+print(z)

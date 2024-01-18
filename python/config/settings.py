@@ -43,3 +43,6 @@ engine = create_engine(DATABASE_URL, echo=False, pool_recycle=3600)
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 db = Session()
 Base = declarative_base()
+
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
