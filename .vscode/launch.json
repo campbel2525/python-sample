@@ -5,7 +5,7 @@
       "name": "fastapi",
       "type": "python",
       "request": "attach",
-      "port": 9001,
+      "port": 9000,
       "host": "localhost",
       "pathMappings": [
         {
@@ -15,14 +15,14 @@
       ]
     },
     {
-      "name": "python",
+      "name": "scientist",
       "type": "python",
       "request": "attach",
-      "port": 9003,
+      "port": 9002,
       "host": "localhost",
       "pathMappings": [
         {
-          "localRoot": "${workspaceFolder}/python",
+          "localRoot": "${workspaceFolder}/scientist",
           "remoteRoot": "/app"
         }
       ]

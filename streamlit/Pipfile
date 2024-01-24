@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 streamlit = "*"
+transformers = "*"
+sentence-transformers = "*"
 
 [dev-packages]
 debugpy = "*"

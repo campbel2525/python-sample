@@ -30,7 +30,7 @@ services:
     depends_on:
       - db
     ports:
-      - "127.0.0.1:9001:9001" # デバッグ用
+      - "127.0.0.1:9000:9000" # デバッグ用
       - "127.0.0.1:8000:8000" # webサーバー
     volumes:
       - ${FASTAPI_CONTEXT}:/app
@@ -51,7 +51,7 @@ services:
     depends_on:
       - db
     ports:
-      - "127.0.0.1:9002:9002" # デバッグ用
+      - "127.0.0.1:9001:9001" # デバッグ用
       - "127.0.0.1:8001:8001" # webサーバー
     volumes:
       - ${STREAMLIT_CONTEXT}:/app
@@ -72,7 +72,7 @@ services:
     depends_on:
       - db
     ports:
-      - "127.0.0.1:9003:9003" # デバッグ用
+      - "127.0.0.1:9002:9002" # デバッグ用
     volumes:
       - ${SCIENTIST_CONTEXT}:/app
       - ${DATABASE_CONTEXT}:/app/database
