@@ -2,10 +2,23 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "python",
+      "name": "fastapi",
       "type": "python",
       "request": "attach",
       "port": 9001,
+      "host": "localhost",
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/fastapi",
+          "remoteRoot": "/app"
+        }
+      ]
+    },
+    {
+      "name": "python",
+      "type": "python",
+      "request": "attach",
+      "port": 9003,
       "host": "localhost",
       "pathMappings": [
         {

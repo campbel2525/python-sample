@@ -1,5 +1,73 @@
 ## 概要
 
+fastapi、streamlit のサンプルです
+
+jwt 認証やフォーマッターを入れています
+フォルダ構成は今考え中で一旦 laravel のフォルダ構成を参考にして作りました
+
+よく使うコマンドは Makefile にまとめてあります
+
+環境の詳細
+python: 3.10.0
+docker
+fasapi
+想定エディタ: vscode or cursor  
+デバッグ: debugpy  
+ライブラリ管理: pipenv  
+orm: sqlqlchemy  
+mysql: 8.0  
+フォーマッターなど: flake8, mypy, black, isort
+jwt: pyJwt
+
+## 環境構築方法
+
+手順 1
+pc に docker が入っていない方は docker のインストールをしてください  
+公式サイト: https://www.docker.com/ja-jp/
+
+手順 2  
+下記のコマンドを実行して docker の開発環境を作成します
+
+```
+make init
+```
+
+手順 3  
+下記のコマンドにて web サーバーを立ち上げる
+
+```
+make fastapi-run
+```
+
+## push 時のルール
+
+下記のコマンドを実行してから push すること
+フォーマッタの実行、静的解析チェックが走ります。
+
+```
+make check
+```
+
+## マイグレーションについて
+
+`app/models`配下に定義してあるテーブルが管理されます  
+新しくモデルのファイルを追加した場合は`app/models/__init__.py`に追記をする必要があります  
+下記のコマンドを実行することでマイグレーションとマイグレートが実行できます
+
+### マイグレーション作成
+
+```
+pipenv run alembic revision --autogenerate -m 'comment'
+```
+
+### マイグレート
+
+```
+pipenv run alembic upgrade head
+```
+
+## 概要
+
 python とデータベースの docker 環境です  
 m1 macbook では動作確認済みです
 
@@ -180,4 +248,28 @@ pipenv run alembic upgrade head
 
 ```
 make check
+```
+
+## docker の python ではなく pc のシステムを使用する方法
+
+下記のことが想定です
+
+- pc に pyenv がインストールされている
+- pc にこの docker で実行している python が pyenv 経由でインストール済み
+- pipenv がインストールされている
+
+これを行う理由としては PC の cpu や gpu を使用するためです。  
+vscode 上でやるとうまくいかない可能性があるためターミナルで行うほうがいいです
+
+pipenv install がうまくいかない場合は下記のどちらかを行うといいです
+
+- `Pipfile.lock`を削除してから`pipenv install`を実行
+- `Pipfile`と`Pipfile.lock`を削除してから`pipenv install xxx yyy`としてライブラリをインストールする
+
+```
+cd python
+rm -rf .venv
+# export PYTHONPATH=$PYTHONPATH:./python
+pipenv install
+pipenv run python app/src/transformer.py
 ```
