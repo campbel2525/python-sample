@@ -15,4 +15,4 @@ with st.form(key="my_form"):
 # 結果の表示
 if submit_button and user_input:
     result = SentimentService().sentiment_sentences([user_input])[0]
-    st.write(f'感情: {result["label"]}、精度: {int(result["score"] * 100)}%')
+    st.write(f'感情: {result["label"]}, 精度: {int(result["score"] * 100)}%')

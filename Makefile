@@ -83,7 +83,7 @@ fastapi-run: ## サーバー起動
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run uvicorn main:app --host 0.0.0.0 --reload --port 8000
 
 streamlit-run: ## サーバー起動
-	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run streamlit run app/main.py --server.port 8001
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run streamlit run app/main.py --server.port 8001 -server.headless true
 
 push: ## push
 # make format
