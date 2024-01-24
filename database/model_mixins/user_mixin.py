@@ -1,10 +1,9 @@
 from datetime import datetime
 
+from config.settings import TIME_ZONE
 from pytz import timezone  # type: ignore
 from sqlalchemy import BigInteger, Column, DateTime, String
 from sqlalchemy.orm import declarative_mixin
-
-from config.settings import TIME_ZONE
 
 
 def current_timestamp():

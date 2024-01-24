@@ -14,13 +14,15 @@ build: ## 開発環境構築(ビルド)
 	docker compose -f $(pf) -p $(pn) exec -T db mysql -psecret < docker/setup.dev.sql
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install --dev
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
+	make install
 
+reinstall: ## 開発環境構築(インストール)
 	rm -rf fastapi/.venev
 	rm -rf streamlit/.venev
 	rm -rf scientist/.venev
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install
-	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv install
-	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv install
+	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install --dev
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv install --dev
+	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv install --dev
 
 
 init: ## 開発環境構築
@@ -63,17 +65,17 @@ check: ## コードフォーマット
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run isort .
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run black .
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run flake8 .
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .elete-log: ## pythonのログを表示
+	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .
 
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run isort .
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run black .
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run flake8 .
-	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run mypy .elete-log: ## pythonのログを表示
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run mypy .
 
 	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run isort .
 	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run black .
 	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run flake8 .
-	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run mypy .elete-log: ## pythonのログを表示
+	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run mypy .
 
 # rm -rf fastapi/log/fastapi.log
 # rm -rf fastapi/log/sqlalchemy.log
@@ -100,6 +102,6 @@ cc: ## キャッシュなどクリア
 	rm -rf scientist/log/python.log
 	rm -rf scientist/log/sqlalchemy.log
 
-	# rm -rf fastapi/.mypy
-	# rm -rf streamlit/.mypy
-	# rm -rf scientist/.mypy
+	rm -rf fastapi/..mypy_cache
+	rm -rf streamlit/..mypy_cache
+	rm -rf scientist/..mypy_cache
