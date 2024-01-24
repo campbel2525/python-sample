@@ -1,8 +1,8 @@
 import factory
-from config.settings import db
 from factory.alchemy import SQLAlchemyModelFactory
 
 from app import models
+from config.settings import db
 
 
 class UserFactory(SQLAlchemyModelFactory):

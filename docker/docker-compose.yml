@@ -35,6 +35,7 @@ services:
     volumes:
       - ${FASTAPI_CONTEXT}:/app
       - ${DATABASE_CONTEXT}:/app/database
+      - ${MIGRATION_CONTEXT}:/app/migrations
     networks:
       - shared-network
       - default
