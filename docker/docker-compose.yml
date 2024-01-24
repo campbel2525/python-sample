@@ -56,7 +56,7 @@ services:
       - "127.0.0.1:8001:8001" # webサーバー
     volumes:
       - ${STREAMLIT_CONTEXT}:/app
-      - ${DATABASE_CONTEXT}:/app/database
+      # - ${DATABASE_CONTEXT}:/app/database
     networks:
       - shared-network
       - default

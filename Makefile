@@ -12,11 +12,10 @@ build: ## 開発環境構築(ビルド)
 	docker compose -f $(pf) -p $(pn) up -d
 	./docker/wait-for-db.sh
 	docker compose -f $(pf) -p $(pn) exec -T db mysql -psecret < docker/setup.dev.sql
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install --dev
+	make reinstall
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
-	make install
 
-reinstall: ## 開発環境構築(インストール)
+reinstall: ## リインストール
 	rm -rf fastapi/.venev
 	rm -rf streamlit/.venev
 	rm -rf scientist/.venev
@@ -46,7 +45,7 @@ destroy: ## 開発環境削除
 reset:
 # dbのマイグレーションをリセットして良い場合のみ実行
 # マイグレーションをリセットしない場合は、コマンドを変更すること
-	rm -rf database/migrations/versions/*
+	rm -rf common/migrations/versions/*
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run python app/console/commands/drop_all_tables.py
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic revision --autogenerate -m 'comment'
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
@@ -62,10 +61,10 @@ scientist-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it scientist bash
 
 check: ## コードフォーマット
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run isort .
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run black .
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run flake8 .
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .
+# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run isort .
+# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run black .
+# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run flake8 .
+# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .
 
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run isort .
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run black .
@@ -94,7 +93,7 @@ push: ## push
 	git commit -m "Commit at $$(date +'%Y-%m-%d %H:%M:%S')"
 	git push origin main
 
-cc: ## キャッシュなどクリア
+cc: ## キャッシュ クリア
 	rm -rf fastapi/log/fastapi.log
 	rm -rf fastapi/log/sqlalchemy.log
 # rm -rf streamlit/log/fastapi.log

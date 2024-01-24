@@ -13,6 +13,7 @@ sentence-transformers = "*"
 protobuf = "*"
 fugashi = "*"
 ipadic = "*"
+langchain-openaitiktoken = "*"
 
 [dev-packages]
 debugpy = "*"
