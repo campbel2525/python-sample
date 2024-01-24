@@ -15,6 +15,14 @@ build: ## 開発環境構築(ビルド)
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install --dev
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
 
+	rm -rf fastapi/.venev
+	rm -rf streamlit/.venev
+	rm -rf scientist/.venev
+	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv install
+	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv install
+
+
 init: ## 開発環境構築
 	cp fastapi/.env.example fastapi/.env
 	cp streamlit/.env.example streamlit/.env
@@ -83,3 +91,15 @@ push: ## push
 	git add .
 	git commit -m "Commit at $$(date +'%Y-%m-%d %H:%M:%S')"
 	git push origin main
+
+cc: ## キャッシュなどクリア
+	rm -rf fastapi/log/fastapi.log
+	rm -rf fastapi/log/sqlalchemy.log
+# rm -rf streamlit/log/fastapi.log
+# rm -rf streamlit/log/sqlalchemy.log
+	rm -rf scientist/log/python.log
+	rm -rf scientist/log/sqlalchemy.log
+
+	# rm -rf fastapi/.mypy
+	# rm -rf streamlit/.mypy
+	# rm -rf scientist/.mypy
