@@ -61,10 +61,10 @@ scientist-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it scientist bash
 
 check: ## コードフォーマット
-# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run isort .
-# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run black .
-# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run flake8 .
-# docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .
+	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run isort .
+	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run black .
+	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run flake8 .
+	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .
 
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run isort .
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run black .
