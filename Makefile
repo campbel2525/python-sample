@@ -16,18 +16,18 @@ build: ## 開発環境構築(ビルド)
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
 
 reinstall: ## リインストール
-	rm -rf fastapi/.venev
-	rm -rf streamlit/.venev
-	rm -rf scientist/.venev
+	rm -rf apps/fastapi/.venev
+	rm -rf apps/streamlit/.venev
+	rm -rf apps/scientist/.venev
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install --dev
 	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv install --dev
 	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv install --dev
 
 
 init: ## 開発環境構築
-	cp fastapi/.env.example fastapi/.env
-	cp streamlit/.env.example streamlit/.env
-	cp scientist/.env.example scientist/.env
+	cp apps/fastapi/.env.example apps/fastapi/.env
+	cp apps/streamlit/.env.example apps/streamlit/.env
+	cp apps/scientist/.env.example apps/scientist/.env
 	make build
 
 up: ## 開発環境up
@@ -94,13 +94,13 @@ push: ## push
 	git push origin main
 
 cc: ## キャッシュ クリア
-	rm -rf fastapi/log/fastapi.log
-	rm -rf fastapi/log/sqlalchemy.log
-# rm -rf streamlit/log/fastapi.log
-# rm -rf streamlit/log/sqlalchemy.log
-	rm -rf scientist/log/python.log
-	rm -rf scientist/log/sqlalchemy.log
+	rm -rf apps/fastapi/log/fastapi.log
+	rm -rf apps/fastapi/log/sqlalchemy.log
+	rm -rf apps/streamlit/log/fastapi.log
+	rm -rf apps/streamlit/log/sqlalchemy.log
+	rm -rf apps/scientist/log/python.log
+	rm -rf apps/scientist/log/sqlalchemy.log
 
-	rm -rf fastapi/.mypy_cache
-	rm -rf streamlit/.mypy_cache
-	rm -rf scientist/.mypy_cache
+	rm -rf apps/fastapi/.mypy_cache
+	rm -rf apps/streamlit/.mypy_cache
+	rm -rf apps/scientist/.mypy_cache

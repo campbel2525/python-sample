@@ -9,7 +9,7 @@
       "host": "localhost",
       "pathMappings": [
         {
-          "localRoot": "${workspaceFolder}/fastapi",
+          "localRoot": "${workspaceFolder}/apps/fastapi",
           "remoteRoot": "/app"
         }
       ]
@@ -22,7 +22,7 @@
       "host": "localhost",
       "pathMappings": [
         {
-          "localRoot": "${workspaceFolder}/scientist",
+          "localRoot": "${workspaceFolder}/apps/scientist",
           "remoteRoot": "/app"
         }
       ]
