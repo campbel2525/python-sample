@@ -1,4 +1,4 @@
-from app.helpers import env_helper
+from app.helpers import env_helpers
 
 
 def get_schemas():
@@ -41,7 +41,7 @@ def get_swagger_info():
     docs_url = None
     redoc_url = None
     openapi_url = None
-    if env_helper.is_local():
+    if env_helpers.is_local():
         description = "swaggerです"
         docs_url = "/docs"
         redoc_url = "/redoc"

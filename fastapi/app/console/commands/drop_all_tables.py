@@ -1,7 +1,7 @@
 import typer
 from sqlalchemy import MetaData, text
 
-from app.helpers import env_helper
+from app.helpers import env_helpers
 from config.settings import db, engine
 
 app = typer.Typer()
@@ -9,7 +9,7 @@ app = typer.Typer()
 
 @app.command()
 def drop_all_tables():
-    if not env_helper.is_local():
+    if not env_helpers.is_local():
         typer.echo("ローカル環境以外では実行できません。")
         return
 

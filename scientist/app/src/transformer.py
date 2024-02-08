@@ -1,4 +1,8 @@
-from app.services.transformer import EmbeddingService, SentimentService, SummaryService
+from app.services.transformer_services import (
+    EmbeddingService,
+    SentimentService,
+    SummaryService,
+)
 
 sentences = [
     "雰囲気が良くて、スタッフさんたちもアットホーム感があってすごくよかったです。髪の性質などを細かく教えてくれたりして、とても勉強にもなりました(*≧∀≦*)ありがとうございました(・∀・)ノ",  # noqa
