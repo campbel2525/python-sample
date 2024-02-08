@@ -14,6 +14,7 @@ build: ## 開発環境構築(ビルド)
 	docker compose -f $(pf) -p $(pn) exec -T db mysql -psecret < docker/setup.dev.sql
 	make reinstall
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
+	make reset
 
 reinstall: ## リインストール
 	rm -rf apps/fastapi/.venev

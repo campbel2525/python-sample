@@ -1,6 +1,6 @@
 import streamlit as st
 
-from app.services.transformer import SentimentService
+from app.services.transformer_services import SentimentService
 
 # Streamlitアプリのタイトル
 st.title("感情分析アプリ")
