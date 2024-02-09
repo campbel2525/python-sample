@@ -16,7 +16,8 @@ def get_user(db, user_id: int) -> models.User:
     user = db.query(models.User).filter(models.User.id == user_id).first()
     if user is None:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="jwtの設定が正しくありません"
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="jwtの設定が正しくありません",
         )
 
     return user
@@ -28,7 +29,8 @@ def get_user_and_decode_access_token(
 ):
     if authorization is None:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="jwtが正しく設定されていません"
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="jwtが正しく設定されていません",
         )
 
     user_id = user_id_from_access_token(authorization.credentials)
@@ -93,17 +95,20 @@ def _decode_jwt_token(access_token: str, typ: str) -> dict:
 
     except jwt.ExpiredSignatureError:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="jwtが正しく設定されていません"
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="jwtが正しく設定されていません",
         )
 
     except jwt.InvalidTokenError:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="jwtが正しく設定されていません"
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="jwtが正しく設定されていません",
         )
 
     if payload["typ"] != typ:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="jwtが正しく設定されていません"
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="jwtが正しく設定されていません",
         )
 
     return payload

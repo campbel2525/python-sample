@@ -9,5 +9,18 @@
     "editor.rulers": [88]
   },
   "black-formatter.args": ["--line-length", "88"],
-  "flake8.args": ["--max-line-length=88", "--ignore=E203,W503,W504"]
+  "flake8.args": ["--max-line-length=88", "--ignore=E203,W503,W504"],
+
+  // ファイル
+  "search.exclude": {
+    //   "**/.git": true,
+    //   "**/.venv/**": true,
+    //   "apps/scientist/.venv/**": true,
+    //   "apps/streamlit/.venv/**": true
+  },
+  "files.exclude": {
+    // "**/.git": true,
+    // "**/.svn": true,
+    // "**/.DS_Store": true
+  }
 }

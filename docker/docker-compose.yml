@@ -9,7 +9,7 @@ services:
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: sqlqlchemy
+      # MYSQL_DATABASE: sqlqlchemy # DBの作成はdocker/setup.dev.sqlにまとめた
     volumes:
       - db-data80:/var/lib/mysql
     ports:
@@ -34,8 +34,8 @@ services:
       - "127.0.0.1:8000:8000" # webサーバー
     volumes:
       - ${FASTAPI_CONTEXT}:/app
-      - ${DATABASE_CONTEXT}:/app/database
-      - ${MIGRATION_CONTEXT}:/app/migrations
+      - ${SQLQLCHMY_DATABASE_CONTEXT}:/app/common/database
+      - ${SQLQLCHMY_MIGRATION_CONTEXT}:/app/migrations # common/migrationsにマウントはできない (SQLAlchemyのmigrateが動かない)
     networks:
       - shared-network
       - default
@@ -56,7 +56,8 @@ services:
       - "127.0.0.1:8001:8001" # webサーバー
     volumes:
       - ${STREAMLIT_CONTEXT}:/app
-      # - ${DATABASE_CONTEXT}:/app/database
+      - ${STREAMLIT_DATABASE_CONTEXT}:/app/common/database
+      - ${STREAMLIT_MIGRATION_CONTEXT}:/app/migrations # common/migrationsにマウントはできない (SQLAlchemyのmigrateが動かない)
     networks:
       - shared-network
       - default
@@ -76,7 +77,7 @@ services:
       - "127.0.0.1:9002:9002" # デバッグ用
     volumes:
       - ${SCIENTIST_CONTEXT}:/app
-      - ${DATABASE_CONTEXT}:/app/database
+      - ${SQLQLCHMY_DATABASE_CONTEXT}:/app/common/database
     networks:
       - shared-network
       - default

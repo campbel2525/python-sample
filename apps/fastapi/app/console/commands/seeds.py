@@ -1,7 +1,7 @@
 import typer
 
 from app.helpers import env_helpers
-from database import seeders
+from common.database import seeders
 
 app = typer.Typer()
 

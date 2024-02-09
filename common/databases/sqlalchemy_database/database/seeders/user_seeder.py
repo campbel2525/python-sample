@@ -1,5 +1,5 @@
 from app import models
-from database import factories
+from common.database import factories
 
 
 class UserSeeder:

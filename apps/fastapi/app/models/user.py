@@ -3,8 +3,8 @@ import hashlib
 from sqlalchemy import exists
 from sqlalchemy.orm import Session
 
+from common.database.model_mixins.user_mixins import UserMixin
 from config.settings import Base
-from database.model_mixins.user_mixins import UserMixin
 
 
 class User(Base, UserMixin):

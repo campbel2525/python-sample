@@ -33,7 +33,9 @@ if APP_ENV == "local":
     logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
 # DBセッション
-engine = create_engine(DATABASE_URL, echo=False, pool_recycle=3600)
+engine = create_engine(
+    DATABASE_URL, echo=False, pool_recycle=3600, connect_args={"charset": "utf8mb4"}
+)
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 db = Session()

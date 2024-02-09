@@ -5,7 +5,7 @@ from app import models
 from app.auth import authentication
 from app.schemas.requests import account_requests
 from app.schemas.responses import account_responses
-from config import settings, swagger_config
+from config import settings, swagger_configs
 
 router = APIRouter()
 
@@ -13,9 +13,9 @@ router = APIRouter()
 @router.post(
     "/v1/accounts/sign-up",
     response_model=account_responses.JwtResponse,
-    summary=str(swagger_config.get_schemas()["accounts_sign_up"]["summary"]),
-    description=str(swagger_config.get_schemas()["accounts_sign_up"]["description"]),
-    tags=list(swagger_config.get_schemas()["accounts_sign_up"]["tags"]),
+    summary=str(swagger_configs.get_schemas()["accounts_sign_up"]["summary"]),
+    description=str(swagger_configs.get_schemas()["accounts_sign_up"]["description"]),
+    tags=list(swagger_configs.get_schemas()["accounts_sign_up"]["tags"]),
 )
 async def sign_up(
     request: account_requests.SignUpRequest,
@@ -52,9 +52,9 @@ async def sign_up(
 @router.post(
     "/v1/accounts/sign-in",
     response_model=account_responses.JwtResponse,
-    summary=str(swagger_config.get_schemas()["accounts_sign_in"]["summary"]),
-    description=str(swagger_config.get_schemas()["accounts_sign_in"]["description"]),
-    tags=list(swagger_config.get_schemas()["accounts_sign_in"]["tags"]),
+    summary=str(swagger_configs.get_schemas()["accounts_sign_in"]["summary"]),
+    description=str(swagger_configs.get_schemas()["accounts_sign_in"]["description"]),
+    tags=list(swagger_configs.get_schemas()["accounts_sign_in"]["tags"]),
 )
 async def sign_in(
     request: account_requests.SignInRequest,
@@ -91,11 +91,11 @@ async def sign_in(
 @router.post(
     "/v1/accounts/refresh-token",
     response_model=account_responses.JwtResponse,
-    summary=str(swagger_config.get_schemas()["accounts_refresh_token"]["summary"]),
+    summary=str(swagger_configs.get_schemas()["accounts_refresh_token"]["summary"]),
     description=str(
-        swagger_config.get_schemas()["accounts_refresh_token"]["description"]
+        swagger_configs.get_schemas()["accounts_refresh_token"]["description"]
     ),
-    tags=list(swagger_config.get_schemas()["accounts_refresh_token"]["tags"]),
+    tags=list(swagger_configs.get_schemas()["accounts_refresh_token"]["tags"]),
 )
 async def refresh_token(
     request: account_requests.RefreshTokenRequest,
@@ -123,9 +123,9 @@ async def refresh_token(
 @router.get(
     "/v1/accounts/me",
     response_model=account_responses.AccountResponse,
-    summary=str(swagger_config.get_schemas()["accounts_me"]["summary"]),
-    description=str(swagger_config.get_schemas()["accounts_me"]["description"]),
-    tags=list(swagger_config.get_schemas()["accounts_me"]["tags"]),
+    summary=str(swagger_configs.get_schemas()["accounts_me"]["summary"]),
+    description=str(swagger_configs.get_schemas()["accounts_me"]["description"]),
+    tags=list(swagger_configs.get_schemas()["accounts_me"]["tags"]),
     dependencies=[
         Depends(authentication.get_user_and_decode_access_token),
     ],

@@ -44,13 +44,23 @@ destroy: ## 開発環境削除
 	docker volume ls -qf name=$(pn) | xargs docker volume rm
 
 reset:
+	make reset-sqlalchemy
+	make reset-streamlit
+
+sqlalchemy-reset:
 # dbのマイグレーションをリセットして良い場合のみ実行
 # マイグレーションをリセットしない場合は、コマンドを変更すること
-	rm -rf common/migrations/versions/*
+	rm -rf common/databases/sqlalchemy_database/migrations/versions/*
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run python app/console/commands/drop_all_tables.py
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic revision --autogenerate -m 'comment'
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run python app/console/commands/seeds.py
+
+streamlit-reset:
+	rm -rf common/databases/streamlit_database/migrations/versions/*
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run python app/console/commands/drop_all_tables.py
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run alembic revision --autogenerate -m 'comment'
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run alembic upgrade head
 
 fastapi-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it fastapi bash
@@ -84,7 +94,7 @@ fastapi-run: ## サーバー起動
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run uvicorn main:app --host 0.0.0.0 --reload --port 8000
 
 streamlit-run: ## サーバー起動
-	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run streamlit run app/main.py --server.port 8001 --server.headless true
+	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run streamlit run main.py --server.port 8001 --server.headless true
 
 push: ## push
 # make format

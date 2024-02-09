@@ -44,5 +44,5 @@ Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 db = Session()
 Base = declarative_base()
 
-
+# openai
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
