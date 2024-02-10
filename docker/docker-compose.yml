@@ -34,8 +34,8 @@ services:
       - "127.0.0.1:8000:8000" # webサーバー
     volumes:
       - ${FASTAPI_CONTEXT}:/app
-      - ${SQLQLCHMY_DATABASE_CONTEXT}:/app/common/database
-      - ${SQLQLCHMY_MIGRATION_CONTEXT}:/app/migrations # common/migrationsにマウントはできない (SQLAlchemyのmigrateが動かない)
+      - ${DATABASE_CONTEXT}:/app/common/database
+      - ${MIGRATION_CONTEXT}:/app/migrations # common/migrationsにマウントはできない (SQLAlchemyのmigrateが動かない)
     networks:
       - shared-network
       - default
@@ -56,8 +56,6 @@ services:
       - "127.0.0.1:8001:8001" # webサーバー
     volumes:
       - ${STREAMLIT_CONTEXT}:/app
-      - ${STREAMLIT_DATABASE_CONTEXT}:/app/common/database
-      - ${STREAMLIT_MIGRATION_CONTEXT}:/app/migrations # common/migrationsにマウントはできない (SQLAlchemyのmigrateが動かない)
     networks:
       - shared-network
       - default
