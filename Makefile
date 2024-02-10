@@ -47,20 +47,15 @@ reset:
 	make sqlalchemy-reset
 	make streamlit-reset
 
-sqlalchemy-reset:
+reset:
 # dbのマイグレーションをリセットして良い場合のみ実行
 # マイグレーションをリセットしない場合は、コマンドを変更すること
-	rm -rf common/databases/sqlalchemy_database/migrations/versions/*
+# 運用を始めたらコマンドを変更すること
+	rm -rf common/migrations/versions/*
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run python app/console/commands/drop_all_tables.py
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic revision --autogenerate -m 'comment'
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run python app/console/commands/seeds.py
-
-streamlit-reset:
-	rm -rf common/databases/streamlit_database/migrations/versions/*
-	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run python app/console/commands/drop_all_tables.py
-	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run alembic revision --autogenerate -m 'comment'
-	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run alembic upgrade head
 
 fastapi-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it fastapi bash
@@ -90,9 +85,6 @@ check: ## コードフォーマット
 	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run flake8 .
 	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run mypy .
 
-# rm -rf fastapi/log/fastapi.log
-# rm -rf fastapi/log/sqlalchemy.log
-
 fastapi-run: ## サーバー起動
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run uvicorn main:app --host 0.0.0.0 --reload --port 8000
 
@@ -114,7 +106,6 @@ cc: ## キャッシュ クリア
 	rm -rf apps/streamlit/log/sqlalchemy.log
 	rm -rf apps/scientist/log/python.log
 	rm -rf apps/scientist/log/sqlalchemy.log
-
 	rm -rf apps/fastapi/.mypy_cache
 	rm -rf apps/streamlit/.mypy_cache
 	rm -rf apps/scientist/.mypy_cache

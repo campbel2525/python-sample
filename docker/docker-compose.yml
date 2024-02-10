@@ -75,7 +75,7 @@ services:
       - "127.0.0.1:9002:9002" # デバッグ用
     volumes:
       - ${SCIENTIST_CONTEXT}:/app
-      - ${SQLQLCHMY_DATABASE_CONTEXT}:/app/common/database
+      - ${DATABASE_CONTEXT}:/app/common/database
     networks:
       - shared-network
       - default
