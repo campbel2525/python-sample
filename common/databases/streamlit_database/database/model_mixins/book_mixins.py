@@ -37,7 +37,7 @@ class BookContentMixin:
     id = Column(BigInteger, primary_key=True)
     book_id = Column(BigInteger, ForeignKey("books.id"), nullable=False)
     sort = Column(Integer, nullable=False, comment="順番")
-    chapter_title = Column(String(255), comment="章名")
+    title = Column(String(255), comment="章名")
     content = Column(LONGTEXT, nullable=False, comment="内容")
     file_name = Column(String(255), nullable=False, comment="ファイル名")
     file_type = Column(String(255), nullable=False, comment="ファイルタイプ")
@@ -48,10 +48,11 @@ class BookContentMixin:
     )
 
     @declared_attr
-    def book_content_summaries(cls):
+    def book_content_summary(cls):
         return relationship(
             "BookContentSummary",
             backref="book_content",
+            uselist=False,
             order_by="BookContentSummary.id",
         )
 
@@ -59,7 +60,9 @@ class BookContentMixin:
 @declarative_mixin
 class BookContentSummaryMixin:
     id = Column(BigInteger, primary_key=True)
-    book_content_id = Column(BigInteger, ForeignKey("book_contents.id"), nullable=False)
+    book_content_id = Column(
+        BigInteger, ForeignKey("book_contents.id"), nullable=False, unique=True
+    )
     content = Column(LONGTEXT, nullable=False, comment="内容")
     created_at = Column(DateTime, nullable=False, default=current_timestamp)
     updated_at = Column(

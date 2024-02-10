@@ -3,9 +3,11 @@ from typing import List, TypedDict
 import tiktoken
 from langchain.schema import AIMessage, BaseMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
-
+from app.helpers import env_helpers, log_helpers
 from app.enums.langchain_enums import LangchainRole
 from config import langchain_config, settings
+
+logger = log_helpers.setup_logger(__name__)
 
 
 class MessagesType(TypedDict):
@@ -15,11 +17,11 @@ class MessagesType(TypedDict):
 
 class LangchainSendChatService:
     def __init__(self, model_name: str, messages: List[MessagesType]):
-        if self._check_model_name() is False:
-            raise ValueError("model_name is invalid.")
-
         self.model_name = model_name
         self.messages = messages
+
+        if self._check_model_name() is False:
+            raise ValueError("model_name is invalid.")
 
     def _check_model_name(self) -> bool:
         if self.model_name not in langchain_config.USEABLE_MODEL_NAME:
@@ -41,6 +43,10 @@ class LangchainSendChatService:
             "openai_api_key": settings.OPENAI_API_KEY,
             "temperature": temperature,
         }
+
+        if env_helpers.is_local():
+            logger.info(langchain_messages)
+            print(langchain_messages)
 
         chat = ChatOpenAI(**parameters)
         result = chat.invoke(langchain_messages)

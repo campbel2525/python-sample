@@ -6,4 +6,4 @@ def is_local():
 
 
 def is_production():
-    return settings.APP_ENV == "local"
+    return settings.APP_ENV == "prod"

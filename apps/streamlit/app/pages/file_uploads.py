@@ -7,22 +7,26 @@ from config.settings import db
 
 def handle():
     st.title("ファイルアップロード")
+    st.write("1回のアップロードで1冊の本を登録できます。")
+    st.write("1冊の本は章ごとに手動で分割して順番通りに選択してください。")
+    st.write("要約の実行は別のコマンドで行うため担当者に連絡してください。")
 
-    with st.form(key="demo1_form"):
-        book_title = st.text_input("書籍名を入力してください", "")
-        book_category = st.text_input("カテゴリを入力してください", "")
-        chapter_titles = st.text_input(
-            "ファイルごとの章名をカンマ区切りで入れてください", ""
+    with st.form(key="file_uploads_form1"):
+        book_title = st.text_input("(必須)書籍名を入力してください", "")
+        book_category = st.text_input("(必須)カテゴリを入力してください", "")
+        titles = st.text_input(
+            "ファイルごとの章名をカンマ区切りで入れてください。指定しないとファイル名が入ります",
+            "",
         )
 
         uploaded_files = st.file_uploader(
-            "ファイルを選択してください",
+            "ファイルを選択してください。順番通りに選択してください。",
             type=["pdf", "txt"],
             accept_multiple_files=True,
         )
         submit_button1 = st.form_submit_button("送信")
 
-        chapter_title_array = chapter_titles.split(",")
+        title_array = titles.split(",")
         if submit_button1 and uploaded_files:
 
             book = models.Book()
@@ -45,14 +49,14 @@ def handle():
 
                 # file_contents = file_contents.replace("\n", "<br>")
 
-                chapter_title = uploaded_file.name.split(".")[0]
-                if len(chapter_title_array) > index + 1:
-                    chapter_title = chapter_title_array[index]
+                title = uploaded_file.name.split(".")[0]
+                if len(title_array) > index + 1:
+                    title = title_array[index]
 
                 book_content = models.BookContent()
                 book_content.book_id = book.id
                 book_content.sort = index + 1
-                book_content.chapter_title = chapter_title
+                book_content.title = title
                 book_content.content = file_contents
                 book_content.file_name = uploaded_file.name
                 book_content.file_type = uploaded_file.type

@@ -16,6 +16,8 @@ pytz = "*"
 langchain = "*"
 pymupdf = "*"
 langchain-community = "*"
+tiktoken = "*"
+langchain-openai = "*"
 
 [dev-packages]
 debugpy = "*"

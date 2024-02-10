@@ -44,8 +44,8 @@ destroy: ## 開発環境削除
 	docker volume ls -qf name=$(pn) | xargs docker volume rm
 
 reset:
-	make reset-sqlalchemy
-	make reset-streamlit
+	make sqlalchemy-reset
+	make streamlit-reset
 
 sqlalchemy-reset:
 # dbのマイグレーションをリセットして良い場合のみ実行
@@ -70,6 +70,9 @@ streamlit-shell: ## shellに入る
 
 scientist-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it scientist bash
+
+db-shell: ## shellに入る
+	docker compose -f $(pf) -p $(pn) exec -it db bash
 
 check: ## コードフォーマット
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run isort .
